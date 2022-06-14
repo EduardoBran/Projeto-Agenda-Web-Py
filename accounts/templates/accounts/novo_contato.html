@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{%block titulo%}Novo Contato | {%endblock%}
+
+{% block conteudo %}
+<br>
+<div class="container">
+    <form action="{%url 'novo_contato'%}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+	<table class="table">
+            {{ form }}
+            <tr>
+                <td colspan="2">
+                    <button type="submit" class="btn btn-primary">Enviar</button>
+                    <button class="btn btn-primary"><a href="{% url 'index' %}">Voltar</a></button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+{% endblock %}

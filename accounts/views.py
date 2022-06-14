@@ -5,7 +5,7 @@ from django.contrib import auth
 from django.core.validators import validate_email
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-# from .models import FormContato
+from .models import FormContato
 
 
 def login(request):
@@ -76,7 +76,7 @@ def cadastro(request):
         messages.error(request, 'E-mail já existente.')
         return render(request, 'accounts/cadastro.html')
 
-    messages.success(request, 'Regitrado com sucesso.')
+    messages.success(request, 'Registrado com sucesso.')
 
     user = User.objects.create_user(username=usuario, email=email,
                                     password=senha, first_name=nome,
@@ -88,3 +88,33 @@ def cadastro(request):
 @login_required(redirect_field_name='login')
 def dashboard(request):
     return render(request, 'accounts/dashboard.html')
+
+
+@login_required(redirect_field_name='login')
+def novo_contato(request):
+    if request.method != 'POST':
+        form = FormContato()
+        return render(request, 'accounts/novo_contato.html', {
+            'form': form
+        })
+    form = FormContato(request.POST, request.FILES)
+
+    if not form.is_valid():
+        messages.error(request, 'Erro ao enviar formulário')
+        form = FormContato()
+        return render(request, 'accounts/novo_contato.html', {
+            'form': form
+        })
+
+    descricao = request.POST.get('descricao')
+
+    if len(descricao) < 5:
+        messages.error(request, 'Descrição precisa ter mais do que 5 caracteres.')
+        form = FormContato()
+        return render(request, 'accounts/novo_contato.html', {
+            'form': form
+        })
+
+    form.save()
+    messages.success(request, f'Contato {request.POST.get("nome")} salvo com sucesso!')
+    return redirect('index')

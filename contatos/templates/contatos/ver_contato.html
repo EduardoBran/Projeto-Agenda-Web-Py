@@ -12,24 +12,23 @@
       {% endif %}
 
         <dl>
-          <dt>ID</dt>
+          <dt>ID:</dt>
           <dd>{{ contato.id }}</dd>
 
-          <dt>Telefone</dt>
+          <dt>Telefone:</dt>
           <dd>{{ contato.telefone }}</dd>
 
-          <dt>E-mail</dt>
+          <dt>E-mail:</dt>
           <dd>{{ contato.email }}</dd>
 
-          <dt>Data criação</dt>
+          <dt>Data criação:</dt>
           <dd>{{ contato.data_criacao|date:'d/m/Y H:i:s' }}</dd>
 
-          <dt>Categoria</dt>
+          <dt>Categoria:</dt>
           <dd>{{ contato.categoria }}</dd>
 
-          <dt>{{ contato.descricao }}</dt>
-          <dd>
-          </dd>
+          <dt>Descrição:</dt>
+          <dd>{{ contato.descricao }}</dd>
         </dl>
 
 {% endblock %}
