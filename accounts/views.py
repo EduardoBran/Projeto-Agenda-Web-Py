@@ -57,10 +57,10 @@ def cadastro(request):
 
     # usuario ou senha ter mais que 6 caracteres
     if len(usuario) < 5:
-        messages.error(request, 'Usuário precisa ter mais que 6 caracteres.')
+        messages.error(request, 'Usuário precisa ter mais que 5 caracteres.')
         return render(request, 'accounts/cadastro.html')
     if len(senha) < 5:
-        messages.error(request, 'Senha precisa ter mais que 6 caracteres.')
+        messages.error(request, 'Senha precisa ter mais que 5 caracteres.')
         return render(request, 'accounts/cadastro.html')
 
     # verificando senhas iguais
@@ -82,7 +82,7 @@ def cadastro(request):
                                     password=senha, first_name=nome,
                                     last_name=sobrenome)
     user.save()
-    return redirect('index')
+    return redirect('login')
 
 
 @login_required(redirect_field_name='login')

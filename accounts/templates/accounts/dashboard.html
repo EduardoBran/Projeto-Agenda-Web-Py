@@ -11,7 +11,7 @@
 
 <form method="POST" action="{% url 'logout' %}">
     {% csrf_token %}
-    <button class="btn btn-primary"><a href="{% url 'index' %}">Voltar</a></button>
-    <button type="submit" class="btn btn-primary">Logout</button>
+    <button class="btn btn-primary"><a class="btn btn-primary" href="{% url 'index' %}">Voltar</a></button>
+    <button type="submit" class="btn btn-primary" style="width: 140px; height: 50px;">Logout</button>
 </form>
 {% endblock %}
